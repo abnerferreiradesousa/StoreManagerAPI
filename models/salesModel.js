@@ -52,9 +52,8 @@ const createSale = async (saleId, quantity, productId) => {
 
 const create = async (sales) => {
   const saleId = await getIdSale();
-  const registerSale = sales
+  sales
     .map(async ({ quantity, productId }) => createSale(saleId, quantity, productId));
-  console.log('🚀 ~ file: salesModel.js ~ line 51 ~ create ~ registerSale', registerSale);
   const resgiterResponse = {
     id: saleId,
     itemsSold: sales,
@@ -62,8 +61,29 @@ const create = async (sales) => {
   return resgiterResponse;
 };
 
+const updateSale = async (quantity, productId, id) => {
+  await connection
+  .execute(
+    `UPDATE sales_products 
+    SET quantity = ?, product_id = ?
+    WHERE sale_id = ?;`,
+    [quantity, productId, id],
+);
+};
+
+const update = async (saleList, id) => {
+  saleList.map(async ({ quantity, productId }) => updateSale(quantity, productId, id));
+  const updatedResponse = {
+    saleId: Number(id),
+    itemUpdated: [{ ...saleList[0] }],
+  };
+  console.log('🚀 ~ file: salesModel.js ~ line 77 ~ update ~ updatedResponse', updatedResponse);
+  return updatedResponse;
+};
+
 module.exports = {
   getAll,
   getById,
   create,
+  update,
 };

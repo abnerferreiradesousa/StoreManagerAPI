@@ -21,14 +21,14 @@ const create = async (name, quantity) => {
 const update = async (id, name, quantity) => {
   const hasProductId = await productModel.getById(id);
   // const hasIdProperty = Object.prototype.hasOwnProperty.call(hasProductId, 'id');
-  if (!hasProductId) return errorMessage(404, 'Product not found');
+  if (hasProductId.length === 0) return errorMessage(404, 'Product not found');
   const result = await productModel.update(id, name, quantity);
   return result;
 };
 
 const remove = async (id) => {
   const hasProductId = await productModel.getById(id);
-  if (!hasProductId) return errorMessage(404, 'Product not found');
+  if (hasProductId.length === 0) return errorMessage(404, 'Product not found');
   const result = await productModel.remove(id);
   return result;
 };

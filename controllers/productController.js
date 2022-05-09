@@ -1,7 +1,7 @@
 const productService = require('../services/productService');
 
 // EM QUAL LUGAR TRATAMOS DADOS PAARA ENVIAR AO USUÁRIO, NO SERVICE OU NO MODEL?
-
+// COMO ESTOURAR UM ERRO
 const getAll = async (req, res) => {
   const product = await productService.getAll();
   if (!product) return res.status(404).json({ message: 'No products' });
@@ -10,8 +10,8 @@ const getAll = async (req, res) => {
 
 const getById = async (req, res) => {
   const product = await productService.getById(req.params.id);
-  if (!product) return res.status(404).json({ message: 'Product not found' });
-  return res.status(200).json(product);
+  if (product.length === 0) return res.status(404).json({ message: 'Product not found' });
+  return res.status(200).json(product[0]);
 };
 
 const create = async (req, res) => {
