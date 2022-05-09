@@ -1,5 +1,7 @@
 const productService = require('../services/productService');
 
+// EM QUAL LUGAR TRATAMOS DADOS PAARA ENVIAR AO USUÁRIO, NO SERVICE OU NO MODEL?
+
 const getAll = async (req, res) => {
   const product = await productService.getAll();
   if (!product) return res.status(404).json({ message: 'No products' });
