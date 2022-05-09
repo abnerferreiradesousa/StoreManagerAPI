@@ -26,9 +26,17 @@ const update = async (id, name, quantity) => {
   return result;
 };
 
+const remove = async (id) => {
+  const hasProductId = await productModel.getById(id);
+  if (!hasProductId) return errorMessage(404, 'Product not found');
+  const result = await productModel.remove(id);
+  return result;
+};
+
 module.exports = {
   getAll,
   getById,
   create,
   update,
+  remove,
 };

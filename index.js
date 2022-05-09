@@ -28,6 +28,8 @@ app.put(
   productController.update,
 );
 
+app.delete('/products/:id', productController.remove);
+
 app.listen(process.env.PORT, () => {
   console.log(`Escutando na porta ${process.env.PORT}`);
 });
