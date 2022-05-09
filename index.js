@@ -2,8 +2,8 @@ const bodyParser = require('body-parser');
 const app = require('./app');
 const productController = require('./controllers/productController');
 const salesController = require('./controllers/salesController');
-const validName = require('./utils/middlewares/validNameMiddleware');
-const validQuantity = require('./utils/middlewares/validQuantityMiddleware');
+const validName = require('./middlewares/validNameMiddleware');
+const validQuantity = require('./middlewares/validQuantityMiddleware');
 
 require('dotenv').config();
 // não altere esse arquivo, essa estrutura é necessária para à avaliação do projeto
@@ -19,6 +19,13 @@ app.post(
   validName,
   validQuantity,
   productController.create,
+);
+
+app.put(
+  '/products/:id',
+  validName,
+  validQuantity, 
+  productController.update,
 );
 
 app.listen(process.env.PORT, () => {
