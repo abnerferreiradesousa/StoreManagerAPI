@@ -40,7 +40,6 @@ const update = async (id, name, quantity) => {
 const remove = async (id) => {
   const result = await connection
     .execute('DELETE FROM products WHERE id = ?', [id]);
-  console.log('🚀 ~ file: productModel.js ~ line 43 ~ remove ~ result', result);
   return result;
 };
 
