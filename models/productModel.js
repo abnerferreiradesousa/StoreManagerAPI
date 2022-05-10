@@ -17,6 +17,8 @@ const getByName = async (name) => {
   return product;
 };
 
+// COMO MOCKAR OS VALORES
+
 const create = async (name, quantity) => {
   const [result] = await connection
     .execute(

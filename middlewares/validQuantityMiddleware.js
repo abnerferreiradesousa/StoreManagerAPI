@@ -1,19 +1,30 @@
 const validQuantity = (req, res, next) => {
-  const { quantity } = req.body;
-  switch (true) {
-    case !quantity:
-      res.status(400).json({ message: '"quantity" is required' });
-      break;
-    case quantity.length <= 0:
-      res.status(422).json({ message: '"quantity" must be greater than or equal to 1' });
-      break;
-    case !Number.isInteger(quantity):
-      res.status(415).json({ message: '"quantity" must be a integer' });
-      break;
-    default:
+  // const { quantity } = req.body;
+  req.body.forEach(({ quantity }, index) => {
+    if (quantity <= 0) {
+      return res.status(422).json({ message: '"quantity" must be greater than or equal to 1' });
+    }
+    if (!quantity) {
+      return res.status(400).json({ message: '"quantity" is required' });
+    }
+    if (index === req.body.length - 1) {
       next();
-      break;
-  }
+    }
+  });
 };
 
-module.exports = validQuantity;
+const validQuantityProduct = (req, res, next) => {
+  const { quantity } = req.body;
+    if (quantity <= 0) {
+      return res.status(422).json({ message: '"quantity" must be greater than or equal to 1' });
+    }
+    if (!quantity) {
+      return res.status(400).json({ message: '"quantity" is required' });
+    }
+  next();
+};
+
+module.exports = {
+  validQuantity,
+  validQuantityProduct,
+};

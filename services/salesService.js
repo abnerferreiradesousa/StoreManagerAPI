@@ -19,7 +19,6 @@ const create = async (sales) => {
 
 const update = async (saleList, id) => {
   const sale = await salesModel.update(saleList, id);
-  // if (sale === undefined) return null;
   return sale;
 };
 

@@ -3,7 +3,8 @@ const bodyParser = require('body-parser');
 const productController = require('./controllers/productController');
 const salesController = require('./controllers/salesController');
 const validName = require('./middlewares/validNameMiddleware');
-const validQuantity = require('./middlewares/validQuantityMiddleware');
+const { validQuantity, validQuantityProduct } = require('./middlewares/validQuantityMiddleware');
+const validProductId = require('./middlewares/validProductIdMiddleware');
 
 const app = express();
 
@@ -19,13 +20,13 @@ app.get('/products/:id', productController.getById);
 app.post(
   '/products',
   validName,
-  validQuantity,
+  validQuantityProduct,
   productController.create,
 );
 app.put(
   '/products/:id',
   validName,
-  validQuantity, 
+  validQuantityProduct, 
   productController.update,
 );
 app.delete('/products/:id', productController.remove);
@@ -34,16 +35,14 @@ app.get('/sales', salesController.getAll);
 app.get('/sales/:id', salesController.getById);
 app.post(
   '/sales',
-// COMO FAZER AS VALIDAÇÕES?
-
-  // validProductId,
-  // validQuantity, 
+  validProductId,
+  validQuantity, 
   salesController.create,
 );
 app.put(
   '/sales/:id',
-  // validProductId,
-  // validQuantity, 
+  validProductId,
+  validQuantity, 
   salesController.update,
 );
 

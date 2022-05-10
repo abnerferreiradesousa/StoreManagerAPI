@@ -37,7 +37,6 @@ const getIdSale = async () => {
   const allSales = await getAllFromSales();
   const response = await connection
     .execute('INSERT INTO sales (id) VALUES (?);', [allSales.length + 1]);
-  console.log('🚀 ~ file: salesModel.js ~ line 34 ~ createSale ~ sale', response);
   return response[0].insertId;
 };
 
@@ -77,7 +76,6 @@ const update = async (saleList, id) => {
     saleId: Number(id),
     itemUpdated: [{ ...saleList[0] }],
   };
-  console.log('🚀 ~ file: salesModel.js ~ line 77 ~ update ~ updatedResponse', updatedResponse);
   return updatedResponse;
 };
 
