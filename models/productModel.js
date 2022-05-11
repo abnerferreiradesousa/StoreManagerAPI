@@ -26,7 +26,7 @@ const create = async (name, quantity) => {
       [name, quantity],
   );
   return { id: result.insertId, name, quantity };
-};  
+};
 
 const update = async (id, name, quantity) => {
   await connection
@@ -40,7 +40,7 @@ const update = async (id, name, quantity) => {
 };
 
 const remove = async (id) => {
-  const result = await connection
+  const [result] = await connection
     .execute('DELETE FROM products WHERE id = ?', [id]);
   return result;
 };
