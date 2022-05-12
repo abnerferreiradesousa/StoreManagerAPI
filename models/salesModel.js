@@ -81,7 +81,7 @@ const update = async (saleList, id) => {
 
 const remove = async (id) => {
   const [result] = await connection
-    .execute('DELETE FROM sales_products WHERE sale_id = ?', [id]);
+  .execute('DELETE FROM sales_products WHERE sale_id = ?', [id]);
   return result;
 };
 

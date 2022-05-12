@@ -39,6 +39,20 @@ const update = async (id, name, quantity) => {
   return { id: Number(id), name, quantity };
 };
 
+const calcQuantiy = async (dataSalesRemoved, operation) => {
+  console.log('chegou aqui');
+  dataSalesRemoved.forEach(async ({ quantity, productId }) => {
+    await connection
+      .execute(
+        `UPDATE products 
+        SET quantity = quantity ${operation} ?
+        WHERE id = ?;`,
+        [quantity, productId],
+    );
+  });
+  return true;
+};
+
 const remove = async (id) => {
   const [result] = await connection
     .execute('DELETE FROM products WHERE id = ?', [id]);
@@ -52,4 +66,5 @@ module.exports = {
   getByName,
   update,
   remove,
+  calcQuantiy,
 };

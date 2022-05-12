@@ -1,4 +1,5 @@
 const salesModel = require('../models/salesModel');
+const productModel = require('../models/productModel');
 const errorMessage = require('../utils/generataErrorMessage');
 // const schema = require('../utils/checks');
 
@@ -13,6 +14,7 @@ const getById = async (id) => {
 };
 
 const create = async (sales) => {
+  await productModel.calcQuantiy(sales, '-');
   const sale = await salesModel.create(sales);
   return sale;
 };
@@ -24,6 +26,7 @@ const update = async (saleList, id) => {
 
 const remove = async (id) => {
   const hasProductId = await salesModel.getById(id);
+  await productModel.calcQuantiy(hasProductId, '+');
   if (hasProductId.length === 0) return errorMessage(404, 'Sale not found');
   const result = await salesModel.remove(id);
   return result;
