@@ -16,6 +16,7 @@ const getById = async (req, res) => {
 const create = async (req, res) => {
   const newSalesList = [...req.body];
   const sale = await salesService.create(newSalesList);
+  if (sale.status) return res.status(sale.status).json({ message: sale.message });
   return res.status(201).json(sale);
 };
 

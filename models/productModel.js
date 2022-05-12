@@ -40,7 +40,6 @@ const update = async (id, name, quantity) => {
 };
 
 const calcQuantiy = async (dataSalesRemoved, operation) => {
-  console.log('chegou aqui');
   dataSalesRemoved.forEach(async ({ quantity, productId }) => {
     await connection
       .execute(
@@ -50,13 +49,35 @@ const calcQuantiy = async (dataSalesRemoved, operation) => {
         [quantity, productId],
     );
   });
-  return true;
 };
 
 const remove = async (id) => {
   const [result] = await connection
     .execute('DELETE FROM products WHERE id = ?', [id]);
   return result;
+};
+
+// const verifyStorageProducts = async (newSales) => {
+//   const query = `SELECT id, quantity
+//   FROM products AS pd
+//   WHERE id = ?;`;
+//   const salesFound = newSales
+//     .map(({ productId }) => connection.execute(query, [productId]));
+//     const [[response]] = await Promise.all(salesFound);
+//   return response;
+// };
+
+const verifyStorageProducts = async (newSales) => {
+  const query = `SELECT 
+  IF(pd.quantity < ?,
+        'Não temos em estoque',
+        'Tá esperando o que! Vende!') AS 'for_sale'
+  FROM products AS pd
+  WHERE pd.id = ?;`;
+    const salesFound = newSales
+    .map(({ productId, quantity }) => connection.execute(query, [quantity, productId]));
+    const [[response]] = await Promise.all(salesFound);
+    return response;
 };
 
 module.exports = {
@@ -67,4 +88,5 @@ module.exports = {
   update,
   remove,
   calcQuantiy,
+  verifyStorageProducts,
 };
