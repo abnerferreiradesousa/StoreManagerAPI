@@ -2,11 +2,22 @@ const productService = require('../services/productService');
 
 // EM QUAL LUGAR TRATAMOS DADOS PAARA ENVIAR AO USUÁRIO, NO SERVICE OU NO MODEL?
 // COMO ESTOURAR UM ERRO
+
+// USAR TRY/CAT
 const getAll = async (req, res) => {
   const product = await productService.getAll();
   if (!product) return res.status(404).json({ message: 'No products' });
   return res.status(200).json(product);
 };
+
+// const getAll = async (req, res, next) => {
+//   try {
+//     const product = await productService.getAll();
+//     return res.status(200).json(product);
+//   } catch (error) {
+//     next(error);
+//   }
+// };
 
 const getById = async (req, res) => {
   const product = await productService.getById(req.params.id);

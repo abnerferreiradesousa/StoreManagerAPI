@@ -7,6 +7,7 @@ const convertKeys = (sale) => ({
     quantity: sale.quantity,
   });
 
+  // da um apelido 
 const getAll = async () => {
   const query = `SELECT sale_id, product_id, quantity, date
   FROM sales_products AS SP
@@ -71,6 +72,8 @@ const updateSale = async (quantity, productId, id) => {
 };
 
 const update = async (saleList, id) => {
+  // promisse all 
+  // nao fazer map no model
   saleList.map(async ({ quantity, productId }) => updateSale(quantity, productId, id));
   const updatedResponse = {
     saleId: Number(id),

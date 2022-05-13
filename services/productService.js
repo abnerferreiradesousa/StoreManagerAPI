@@ -6,6 +6,14 @@ const getAll = async () => {
   return products;
 };
 
+// const getAll = async () => {
+//   const products = await productModel.getAll();
+//   if (!products) {
+//     throw errorMessage(404, 'No products');
+//   }
+//   return products;
+// };
+
 const getById = async (id) => {
   const products = await productModel.getById(id);
   return products;
