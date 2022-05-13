@@ -150,4 +150,56 @@ describe('Testa salesModels e sua interação com um db', () => {
       );
     });
   })
+
+  describe('Testa função getAllFromSales se não existirem produtos.', () => {
+
+    before(() => {
+      sinon.stub(connection, 'execute').resolves([[]]);
+    })
+
+    after(() => {
+      connection.execute.restore();
+    })
+
+    it('retorna um array', async () => {
+      const result = await salesModel.getAllFromSales(); 
+      expect(result).to.be.a('array');
+    });
+
+    it('retorna um array vazio', async () => {
+      const result = await salesModel.getAllFromSales(); 
+      expect(result).to.be.empty;
+    });
+
+  })
+
+  describe('Testa função getAllFromSales Se existirem produtos', () => {
+    const response = [
+      {id: 2}
+    ]
+
+    before(() => {
+      sinon.stub(connection, 'execute').resolves([response]);
+    })
+
+    after(() => {
+      connection.execute.restore();
+    })
+
+    it('retorna um array', async () => {
+      const result = await salesModel.getAllFromSales(); 
+      expect(result).to.be.a('array');
+    });
+
+    it('retorna um array de objetos', async () => {
+      const [result] = await salesModel.getAllFromSales();
+      expect(result).to.be.a('object');
+    });
+
+    it('o objeto deve conter as chaves convertidas', async () => {
+    const result = await salesModel.getAllFromSales(); 
+      expect(result[0]).to.have.all.keys('id');
+    });
+  })
+
 })

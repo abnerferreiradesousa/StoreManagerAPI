@@ -77,6 +77,8 @@ const verifyStorageProducts = async (newSales) => {
     const salesFound = newSales
     .map(({ productId, quantity }) => connection.execute(query, [quantity, productId]));
     const [[response]] = await Promise.all(salesFound);
+    console.log('🚀 ~ file: productModel.js ~ line 80 ~ verifyStorageProducts ~ response', response);
+    
     return response;
 };
 

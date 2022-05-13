@@ -2,6 +2,7 @@ const salesService = require('../../../services/salesService');
 const salesController = require('../../../controllers/salesController');
 const { expect } = require('chai');
 const sinon = require('sinon');
+const { send } = require('express/lib/response');
 
 describe('Testa salesController e sua interação com um db', () => {
 
@@ -127,7 +128,42 @@ describe('Testa salesController e sua interação com um db', () => {
     });
   });
 
-  describe('Testa função create se existirem produtos.', () => {
+  describe('Testa função create se nao houver produtos suficientes em estoque.', () => {
+    const response = {};
+    const request = {};
+    request.body = [
+      {
+        "productId": 1,
+        "quantity": 3
+      }
+    ];
+    const mockRes = {
+      status: 422,
+      message: 'Such amount is not permitted to sell'
+    }
+
+    before(() => {
+      response.status = sinon.stub().returns(response);
+      response.json = sinon.stub().returns();
+      sinon.stub(salesService, 'create').resolves(mockRes)
+    })
+
+    after(() => {
+      salesService.create.restore();
+    })
+
+    it('retorna o status 422 quando tudo da certo', async () => {
+      await salesController.create(request, response);
+      expect(response.status.calledWith(422)).to.be.equal(true);
+    });
+
+    it('retorna um json com o erro \'Such amount is not permitted to sell\'', async () => {
+      await salesController.create(request, response);
+      expect(response.json.calledWith({message: mockRes.message})).to.be.equal(true);
+    });
+  });
+
+  describe('Testa função create se existirem produtos suficientes em estoque.', () => {
     const response = {};
     const request = {};
     request.body = [
@@ -204,6 +240,54 @@ describe('Testa salesController e sua interação com um db', () => {
     it('retorna um objeto quando tudo da certo', async () => {
       await salesController.update(request, response);
       expect(response.json.calledWith(mockRes)).to.be.equal(true);
+    });
+  });
+
+  describe('Testa função remove se não existirem produtos.', () => {
+    const response = {};
+    const request = {};
+    request.params = { id: 1 };
+    const jsonRes = { status: 404, message: 'Sale not found' };
+    before(() => {
+      response.status = sinon.stub().returns(response);
+      response.json = sinon.stub().returns();
+      sinon.stub(salesService, 'remove').resolves(jsonRes);
+    })
+
+    after(() => {
+      salesService.remove.restore();
+    })
+
+    it('retorna o status 404 quando tudo da certo', async () => {
+      await salesController.remove(request, response);
+      expect(response.status.calledWith(404)).to.be.equal(true);
+    });
+
+    it('retorna um json de erro quando tudo da certo', async () => {
+      await salesController.remove(request, response);
+      expect(response.json.calledWith({message: jsonRes.message})).to.be.equal(true);
+    });
+  })
+
+  describe('Testa função remove se existirem produtos.', () => {
+    const response = {};
+    const request = {};
+    request.params = { id: 1 };
+
+    before(() => {
+      response.status = sinon.stub().returns(response);
+      response.json = sinon.stub().returns();
+      response.send = sinon.stub().returns();
+      sinon.stub(salesService, 'remove').resolves(true)
+    })
+
+    after(() => {
+      salesService.remove.restore();
+    })
+
+    it('retorna o status 204 quando tudo da certo', async () => {
+      await salesController.remove(request, response);
+      expect(response.status.calledWith(204)).to.be.equal(true);
     });
   });
 }) 

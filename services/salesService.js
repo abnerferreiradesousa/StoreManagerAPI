@@ -15,11 +15,8 @@ const getById = async (id) => {
 
 const create = async (newSales) => {
   const verifiedStorage = await productModel.verifyStorageProducts(newSales);
-  console.log('🚀 ~ file: salesService.js ~ line 18 ~ create ~ verifiedStorage', verifiedStorage);
   const result = verifiedStorage
     .find(({ for_sale: forSale }) => forSale === 'Não temos em estoque');
-  console.log('🚀 ~ file: salesService.js ~ line 21 ~ create ~ result', result);
-    
   if (result && result.for_sale) return errorMessage(422, 'Such amount is not permitted to sell');
   await productModel.calcQuantiy(newSales, '-');
   const sale = await salesModel.create(newSales);

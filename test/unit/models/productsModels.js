@@ -351,5 +351,29 @@ describe('Testa productsModels e sua interação com um db', () => {
     });
 
   })
+
+  describe('Testa função verifyStorageProducts se não existirem produtos.', () => {
+    const response = [[ { for_sale: 'Tá esperando o que! Vende!' } ]];
+    const newSales =   [
+      {
+        "productId": 1,
+        "quantity": 100
+      }
+    ];
+
+    before(() => {
+      sinon.stub(connection, 'execute').resolves([response]);
+    })
+
+    after(() => {
+      connection.execute.restore();
+    })
+
+    it('retorna um array', async () => {
+      const result = await productModel.verifyStorageProducts(newSales); 
+      expect(result).to.be.a('array');
+    });
+  })
+
 })
 

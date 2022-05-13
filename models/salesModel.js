@@ -30,7 +30,7 @@ const getById = async (id) => {
 const getAllFromSales = async () => {
   const query = 'SELECT id FROM sales';
   const [allSales] = await connection.execute(query);  
-  return allSales.map(convertKeys);
+  return allSales;
 };
 
 const getIdSale = async () => {
@@ -45,7 +45,7 @@ const createSale = async (saleId, quantity, productId) => {
     .execute(
       'INSERT INTO sales_products (sale_id, product_id, quantity) VALUES (?, ?, ?);',
       [saleId, productId, quantity],
-  );
+  );  
   return result;
 };
 
@@ -91,4 +91,6 @@ module.exports = {
   create,
   update,
   remove,
+  getAllFromSales,
+  getIdSale,
 };
