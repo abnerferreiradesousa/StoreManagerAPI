@@ -1,8 +1,8 @@
 const connection = require('./connection');
 
 const getAll = async () => {
-  const [allProducts] = await connection.execute('SELECT * FROM products');
-  return allProducts;
+  const [products] = await connection.execute('SELECT * FROM products');
+  return products;
 }; 
 
 const getById = async (id) => {
@@ -16,8 +16,6 @@ const getByName = async (name) => {
     .execute('SELECT * FROM products WHERE name = ?', [name]);    
   return product;
 };
-
-// COMO MOCKAR OS VALORES
 
 const create = async (name, quantity) => {
   const [result] = await connection
@@ -52,20 +50,9 @@ const calcQuantiy = async (dataSalesRemoved, operation) => {
 };
 
 const remove = async (id) => {
-  const [result] = await connection
+  await connection
     .execute('DELETE FROM products WHERE id = ?', [id]);
-  return result;
 };
-
-// const verifyStorageProducts = async (newSales) => {
-//   const query = `SELECT id, quantity
-//   FROM products AS pd
-//   WHERE id = ?;`;
-//   const salesFound = newSales
-//     .map(({ productId }) => connection.execute(query, [productId]));
-//     const [[response]] = await Promise.all(salesFound);
-//   return response;
-// };
 
 const verifyStorageProducts = async (newSales) => {
   const query = `SELECT 
@@ -75,7 +62,7 @@ const verifyStorageProducts = async (newSales) => {
   FROM products AS pd
   WHERE pd.id = ?;`;
     const salesFound = newSales
-    .map(({ productId, quantity }) => connection.execute(query, [quantity, productId]));
+      .map(({ productId, quantity }) => connection.execute(query, [quantity, productId]));
     const [[response]] = await Promise.all(salesFound);
     return response;
 };

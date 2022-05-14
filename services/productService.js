@@ -3,42 +3,44 @@ const errorMessage = require('../utils/generataErrorMessage');
 
 const getAll = async () => {
   const products = await productModel.getAll();
+  if (!products) {
+    throw errorMessage(404, 'No products');
+  }
   return products;
 };
 
-// const getAll = async () => {
-//   const products = await productModel.getAll();
-//   if (!products) {
-//     throw errorMessage(404, 'No products');
-//   }
-//   return products;
-// };
-
-const getById = async (id) => {
-  const products = await productModel.getById(id);
-  return products;
+const getById = async (id) => {   
+  const product = await productModel.getById(id);
+  if (!product.length) {
+    throw errorMessage(404, 'Product not found');
+  }
+  return product;
 };
 
 const create = async (name, quantity) => {
-  const hasProductName = await productModel.getByName(name);
-  if (hasProductName.length > 0) return errorMessage(409, 'Product already exists');
-  const result = await productModel.create(name, quantity);
-  return result;
+  const hasProductNameInDb = await productModel.getByName(name);
+  if (hasProductNameInDb.length) {
+    throw errorMessage(409, 'Product already exists');
+  }
+  const productCreated = await productModel.create(name, quantity);
+  return productCreated;
 };
 
 const update = async (id, name, quantity) => {
-  const hasProductId = await productModel.getById(id);
-  // const hasIdProperty = Object.prototype.hasOwnProperty.call(hasProductId, 'id');
-  if (hasProductId.length === 0) return errorMessage(404, 'Product not found');
-  const result = await productModel.update(id, name, quantity);
-  return result;
+  const hasProductIdInDb = await productModel.getById(id);
+  if (!hasProductIdInDb.length) {
+    throw errorMessage(404, 'Product not found');
+  }
+  const productUpdated = await productModel.update(id, name, quantity);
+  return productUpdated;
 };
 
 const remove = async (id) => {
   const hasProductId = await productModel.getById(id);
-  if (hasProductId.length === 0) return errorMessage(404, 'Product not found');
-  const result = await productModel.remove(id);
-  return result;
+  if (!hasProductId.length) {
+    throw errorMessage(404, 'Product not found');
+  }
+  await productModel.remove(id);
 };
 
 module.exports = {

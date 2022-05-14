@@ -1,50 +1,52 @@
 const productService = require('../services/productService');
 
-// EM QUAL LUGAR TRATAMOS DADOS PAARA ENVIAR AO USUÁRIO, NO SERVICE OU NO MODEL?
-// COMO ESTOURAR UM ERRO
-
-// USAR TRY/CAT
-const getAll = async (req, res) => {
-  const product = await productService.getAll();
-  if (!product) return res.status(404).json({ message: 'No products' });
-  return res.status(200).json(product);
+const getAll = async (_req, res, next) => {
+  try {
+    const product = await productService.getAll();
+    return res.status(200).json(product);
+  } catch (error) {
+    next(error);
+  }
 };
 
-// const getAll = async (req, res, next) => {
-//   try {
-//     const product = await productService.getAll();
-//     return res.status(200).json(product);
-//   } catch (error) {
-//     next(error);
-//   }
-// };
-
-const getById = async (req, res) => {
-  const product = await productService.getById(req.params.id);
-  if (product.length === 0) return res.status(404).json({ message: 'Product not found' });
-  return res.status(200).json(product[0]);
+const getById = async (req, res, next) => {
+  try {
+    const product = await productService.getById(req.params.id);
+    return res.status(200).json(product[0]);
+  } catch (error) {
+    next(error);
+  }
 };
 
-const create = async (req, res) => {
-  const { name, quantity } = req.body;
-  const result = await productService.create(name, quantity);
-  if (result.message) return res.status(result.status).json({ message: result.message }); 
-  return res.status(201).json(result);
+const create = async (req, res, next) => {
+  try {
+    const { name, quantity } = req.body;
+    const result = await productService.create(name, quantity);
+    return res.status(201).json(result);
+  } catch (error) {
+    next(error);
+  }
 };
 
-const update = async (req, res) => {
-  const { id } = req.params;
-  const { name, quantity } = req.body;
-  const result = await productService.update(id, name, quantity);
-  if (result.message) return res.status(result.status).json({ message: result.message }); 
-  return res.status(200).json(result);
+const update = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { name, quantity } = req.body;
+    const result = await productService.update(id, name, quantity);
+    return res.status(200).json(result);
+  } catch (error) {
+    next(error);    
+  }
 };
 
-const remove = async (req, res) => {
-  const { id } = req.params;
-  const result = await productService.remove(id);
-  if (result.message) return res.status(result.status).json({ message: result.message }); 
-  return res.status(204).send();
+const remove = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    await productService.remove(id);
+    return res.status(204).end();
+  } catch (error) {
+    next(error);    
+  }
 };
 
 module.exports = {
