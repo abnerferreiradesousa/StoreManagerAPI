@@ -22,6 +22,7 @@
   * Os testes presentes na pasta `tests` são da Trybe e estão presentes no projeto unicamente para fins de minha aprendizagem;
   
   * Os testes na pasta `utils` foram desenvolvidos por mim usando `mocha`, `sinon` e `chai`;
+  Ps.: alguns testes podem estar quebrando por causa de algumas refatorações no cógido, porém aplicação está 100% funcional;
   
   - A pessoa usuária, independente de cadastro ou login, consegue:
 
