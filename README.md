@@ -7,7 +7,7 @@
 
   Você vai desenvolver sua primeira API utilizando a arquitetura MSC (model-service-controller)!
 
-  A API a ser construída é um sistema de gerenciamento de vendas em que será possível criar, visualizar, deletar e atualizar produtos e vendas.
+  A API a ser construída é um sistema de gerenciamento de vendas em que será possível criar, visualizar, deletar e atualizar pr`odutos e vendas.
 
   Você deverá utilizar o banco MySQL para a gestão de dados. Além disso, a API deve ser RESTful.
 
@@ -19,6 +19,10 @@
 <details>
   <summary><strong>⚠️ Observações importantes</strong></summary><br />
 
+  * Os testes presentes na pasta `tests` são da Trybe e estão presentes no projeto unicamente para fins de minha aprendizagem;
+  
+  * Os testes na pasta `utils` foram desenvolvidos por mim usando `mocha`, `sinon` e `chai`;
+  
   - A pessoa usuária, independente de cadastro ou login, consegue:
 
     - Adicionar, ler, deletar e atualizar produtos no estoque;
