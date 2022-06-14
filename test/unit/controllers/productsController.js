@@ -2,17 +2,19 @@ const productService = require('../../../services/productService');
 const productController = require('../../../controllers/productController');
 const { expect } = require('chai');
 const sinon = require('sinon');
+const errorMessage = require('../../../utils/generataErrorMessage');
 
 describe('Testa productController e sua interação com um db', () => {
 
-  describe('Testa função getAll se não existirem produtos.', () => {
+  describe.only('Testa função getAll se não existirem produtos.', () => {
     const response = {};
     const request = {};
-    const jsonRes = { message: 'No products' };
+    const jsonRes = { status: 404, message: 'No products' };
     before(() => {
-      response.status = sinon.stub().returns(response);
-      response.json = sinon.stub().returns();
-      sinon.stub(productService, 'getAll').resolves()
+      // response.status = sinon.stub().returns(response);
+      // response.json = sinon.stub().returns();
+      next = sinon.stub().returns()
+      sinon.stub(productService, 'getAll').throws(jsonRes);
     })
 
     after(() => {
@@ -20,13 +22,13 @@ describe('Testa productController e sua interação com um db', () => {
     })
 
     it('retorna o status 404 quando tudo da certo', async () => {
-      await productController.getAll(request, response); 
-      expect(response.status.calledWith(404)).to.be.equal(true);
+      await productController.getAll(request, response, next); 
+      expect(response.status).to.be.equal(404);
     });
 
     it('retorna um json de erro quando tudo da certo', async () => {
-      await productController.getAll(request, response); 
-      expect(response.json.calledWith(jsonRes)).to.be.equal(true);
+      await productController.getAll(request, response, next); 
+      expect(response.body.message).to.be.equal('No products');
     });
   }) 
 
@@ -62,7 +64,7 @@ describe('Testa productController e sua interação com um db', () => {
     before(() => {
       response.status = sinon.stub().returns(response);
       response.json = sinon.stub().returns();
-      sinon.stub(productService, 'getById').resolves([])
+      sinon.stub(productService, 'getById').throws(errorMessage(404, 'Product not found'))
     })
 
     after(() => {
