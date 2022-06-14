@@ -5,11 +5,11 @@
 <details>
   <summary><strong>👨‍💻 O que deverá ser desenvolvido</strong></summary><br />
 
-  Você vai desenvolver sua primeira API utilizando a arquitetura MSC (model-service-controller)!
+  Desenvolvi minha primeira API utilizando a arquitetura MSC (model-service-controller)!
 
-  A API a ser construída é um sistema de gerenciamento de vendas em que será possível criar, visualizar, deletar e atualizar pr`odutos e vendas.
+  A API construída é um sistema de gerenciamento de vendas em que será possível criar, visualizar, deletar e atualizar pr`odutos e vendas.
 
-  Você deverá utilizar o banco MySQL para a gestão de dados. Além disso, a API deve ser RESTful.
+  Utilizei o banco MySQL para a gestão de dados. Além disso, a API é RESTful.
 
   <br />
 </details>
