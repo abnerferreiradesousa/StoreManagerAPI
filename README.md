@@ -199,8 +199,7 @@ A tabela `sales_products`, é a tabela que faz o relacionamento `N:N` entre `pro
       }
   ```
   
-  </details>
-<br>
+  </details
   
   ## 3 - O endpoint `/sales` para listar as vendas
   <details close>
@@ -225,7 +224,7 @@ A tabela `sales_products`, é a tabela que faz o relacionamento `N:N` entre `pro
   ```
   </details>
   
-    ## 4 - O endpoint `/sales/:id` para listar uma venda específica
+  ## 4 - O endpoint `/sales/:id` para listar uma venda específica
   <details close>
   <summary>O que é retornado</summary>
   <br>
@@ -246,28 +245,7 @@ A tabela `sales_products`, é a tabela que faz o relacionamento `N:N` entre `pro
     ```
   </details>
   
-## 4 - Crie um endpoint para o cadastro de produtos
-
-- O endpoint deve ser acessível através do caminho (`/products`);
-
-- Os produtos enviados devem ser salvos na tabela `products` do Banco de Dados;
-
-- *Observe as regras de negócio e coloque na camada certa;*
-
-<details close>
-  <summary>O que será validado</summary>
-  <br>
-
-  > :point_right: Para o endpoint `POST /products`, o campo `name` deve ser uma _string_ com 5 ou mais caracteres e deve ser único.
-
-  - Quando a requisição é feita com o atributo `name` igual um já cadastrado:
-    ```json
-      { "name": "produto", "quantity": 100 }
-    ```
-    - sua API deve responder com status http `409` e o seguinte `body`:
-    ```json
-      { "message": "Product already exists" }
-    ```
+## 5 - O endpoint `/products` com método `POST` é usado para o cadastro de produtos
 
   > :point_right: Para o endpoint `POST /products`, quando a requisição é feita corretamente, o produto deve ser cadastrado.
   - Quando a requisição é feita e contém o seguinte `body`:
@@ -280,15 +258,8 @@ A tabela `sales_products`, é a tabela que faz o relacionamento `N:N` entre `pro
 
 </details>
 
-## 5 - Crie um endpoint para atualizar um produto
+## 6 - O endpoint `/products/:id`` com método `PUT` para atualizar um produto
 
-- O endpoint deve ser acessível através do caminho (`/products/:id`);
-
-- O corpo da requisição deve seguir a mesma estrutura do método responsável por adicionar um produto;
-
-- Apenas o produto com o `id` presente na URL deve ser atualizado;
-
-- *Observe as regras de negócio e coloque na camada certa;*
 
 <details close>
   <summary>O que será validado</summary>
@@ -303,35 +274,12 @@ A tabela `sales_products`, é a tabela que faz o relacionamento `N:N` entre `pro
     ```json
       { "id": 1, "name": "produto", "quantity": 15 }
     ```
-
-  > :point_right: Para o endpoint `PUT /products/:id`, será validado que não é possível alterar um produto que não existe.
-  - sua API deve responder com status http `404` e o seguinte `body`:
-    ```json
-      { "message": "Product not found" }
-    ```
+    
 </details>
 
-## 6 - Crie um endpoint para deletar um produto
+## 7 - O endpoint `/products/:id`` com método `delete` para deletar um produto
 
-- O endpoint deve ser acessível através do caminho (`/products/:id`);
-
-- Apenas o produto com o `id` presente na URL deve ser deletado;
-
-- *Observe as regras de negócio e coloque na camada certa;*
-
-<details close>
-  <summary>O que será validado</summary>
-  <br>
-
-  > :point_right: Para o endpoint `DELETE /products/:id`, será validado que é possível deletar um produto com sucesso.
-  - sua API deve responder com status http `204` e sem nenhuma resposta no `body`.
-
-  > :point_right: Para o endpoint `DELETE /products/:id`, será validado que não é possível deletar um produto que não existe.
-  - sua API deve responder com status http `404` e o seguinte `body`:
-    ```json
-      { "message": "Product not found" }
-    ```
-</details>
+* Retorna o status 204 e nenhum body.
 
 ## 7 - Crie um endpoint para cadastrar vendas
 
