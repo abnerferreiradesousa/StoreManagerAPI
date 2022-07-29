@@ -201,28 +201,32 @@ A tabela `sales_products`, é a tabela que faz o relacionamento `N:N` entre `pro
   
   </details
   
+  
 ## 3 - O endpoint `/sales` para listar as vendas
-  <details close>
-  <summary>O que é retornado</summary>
-  <br>
-    
-  ```json
-    [
-      {
-        "saleId": 1,
-        "date": "2021-09-09T04:54:29.000Z",
-        "productId": 1,
-        "quantity": 2
-      },
-      {
-        "saleId": 1,
-        "date": "2021-09-09T04:54:54.000Z",
-        "productId": 2,
-        "quantity": 2
-      }
-    ]
-  ```
-  </details>
+
+<details close>
+<summary>O que é retornado</summary>
+<br>
+
+```json
+  [
+    {
+      "saleId": 1,
+      "date": "2021-09-09T04:54:29.000Z",
+      "productId": 1,
+      "quantity": 2
+    },
+    {
+      "saleId": 1,
+      "date": "2021-09-09T04:54:54.000Z",
+      "productId": 2,
+      "quantity": 2
+    }
+  ]
+```
+
+ </details>
+  
   
   ## 4 - O endpoint `/sales/:id` para listar uma venda específica
   <details close>
@@ -243,10 +247,10 @@ A tabela `sales_products`, é a tabela que faz o relacionamento `N:N` entre `pro
         }
       ]
     ```
-  </details>
   
 ## 5 - O endpoint `/products` com método `POST` é usado para o cadastro de produtos
-
+ <details close>
+  <summary>O que é retornado</summary>
   > :point_right: Para o endpoint `POST /products`, quando a requisição é feita corretamente, o produto deve ser cadastrado.
   - Quando a requisição é feita e contém o seguinte `body`:
     ```json
@@ -283,7 +287,6 @@ A tabela `sales_products`, é a tabela que faz o relacionamento `N:N` entre `pro
 
 ## 8 - O endpoint `/sales` com método `POST` serve para cadastrar vendas
 
-- O endpoint deve ser acessível através do caminho (`/sales`);
 <details close>
   <summary>O que será validado</summary>
   <br>
