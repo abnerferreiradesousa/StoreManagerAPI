@@ -187,31 +187,26 @@ A tabela `sales_products`, é a tabela que faz o relacionamento `N:N` entre `pro
   </details>
   
 ## 2 - O endpoint `/products/:id` para listar um único produto e as vendas
-<details close>
+  <details close>
   <summary>O que é retornado</summary>
   <br>
   
-    ```json
+  ```json
       {
         "id": 1,
         "name": "produto A",
         "quantity": 10
       }
-    ```
+  ```
   
-</details>
+  </details>
 <br>
-
-### :information_source: Para **Vendas**
-
-- O endpoint para listar vendas deve ser acessível através do caminho (`/sales`) e (`/sales/:id`);
-
-<details close>
-  <summary>O que será validado no endpoint para listar vendas</summary>
+  
+  ## 3 - O endpoint `/sales` para listar as vendas
+  <details close>
+  <summary>O que é retornado</summary>
   <br>
-
-  > :point_right: Para o endpoint `GET /sales`, será validado que todas vendas estão sendo retornados.
-  - sua API deve responder com status http `200` e o seguinte `body`:
+    
   ```json
     [
       {
@@ -228,9 +223,13 @@ A tabela `sales_products`, é a tabela que faz o relacionamento `N:N` entre `pro
       }
     ]
   ```
-
-  > :point_right: Para o endpoint `GET /sales/:id`, será validado que é possível listar uma determinada venda.
-  - sua API deve responder com status http `200` e o seguinte `body`:
+  </details>
+  
+    ## 4 - O endpoint `/sales/:id` para listar uma venda específica
+  <details close>
+  <summary>O que é retornado</summary>
+  <br>
+    
     ```json
       [
         {
@@ -245,8 +244,8 @@ A tabela `sales_products`, é a tabela que faz o relacionamento `N:N` entre `pro
         }
       ]
     ```
-</details>
-
+  </details>
+  
 ## 4 - Crie um endpoint para o cadastro de produtos
 
 - O endpoint deve ser acessível através do caminho (`/products`);
