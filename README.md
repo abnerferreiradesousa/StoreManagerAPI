@@ -265,7 +265,7 @@ A tabela `sales_products`, é a tabela que faz o relacionamento `N:N` entre `pro
 
 </details>
 
-## 6 - O endpoint `/products/:id`` com método `PUT` para atualizar um produto
+## 6 - O endpoint `/products/:id` com método `PUT` para atualizar um produto
 
 
 <details close>
@@ -284,7 +284,7 @@ A tabela `sales_products`, é a tabela que faz o relacionamento `N:N` entre `pro
     
 </details>
 
-## 7 - O endpoint `/products/:id`` com método `delete` para deletar um produto
+## 7 - O endpoint `/products/:id` com método `delete` para deletar um produto
 
 * Retorna o status 204 e nenhum body.
 
