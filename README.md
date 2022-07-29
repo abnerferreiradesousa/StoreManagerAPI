@@ -24,6 +24,8 @@
   * Os testes na pasta `utils` foram desenvolvidos por mim usando `mocha`, `sinon` e `chai`;
   Ps.: alguns testes podem estar quebrando por causa de algumas refatorações no código, porém aplicação está 100% funcional;
   
+  * Sobre o que é possível fazer nesse projeto:
+  
   - A pessoa usuária, independente de cadastro ou login, consegue:
 
     - Adicionar, ler, deletar e atualizar produtos no estoque;
@@ -100,7 +102,7 @@
 </details>
 
 <details>
-  <summary><strong>‼️ Antes de começar a desenvolver</strong></summary><br />
+  <summary><strong>Iniciando projeto</strong></summary><br />
 
   1. Clone o repositório
 
@@ -163,47 +165,11 @@ A tabela `sales_products`, é a tabela que faz o relacionamento `N:N` entre `pro
 
 # Requisitos Obrigatórios
 
-## 1 - Escreva testes para cobrir 35% das camadas da sua aplicação
-
-- Seus arquivos de teste devem ficar no diretório `test/unit`, **como citado [aqui](#para-escrever-seus-própios-arquivos-de-teste)**;
-
-- Seus testes da `model` devem fazer mock do banco de dados obrigatóriamente;
-
-- Opcionalmente você pode parar o serviço do `MYSQL` em sua máquina. Para rodar seus teste utilize `npm run test:mocha`;
+## 1 - O endpoint `/products` para listar os produtos e as vendas
+## 2 - O endpoint `/products/:id` para listar um único produto e as vendas
 
 <details close>
-  <summary>O que será validado</summary>
-  <br>
-
-  > :point_right: Será validado que a cobertura total das linhas dos arquivos de CADA camada `models`, `services` e `controllers` é maior ou igual a 35%. Ou seja, cada uma das camadas tem de ter, ao menos, 35% de cobertura de testes.
-
-  > :point_right: Será validado que ao menos 24 linhas são cobertas pelos testes.
-
-</details>
-
-## 2 - Crie endpoints para listar os produtos e as vendas
-
->💬 O setup inicial da sua aplicação **é determinante para que esse e os demais requisitos funcionem corretamente.**
->
-> Portanto, antes de começar o requisito, garanta ter seguido as orientações do `README` nas seguintes seções:
->
->- `Todos os seus endpoints devem estar no padrão REST`;
->- `Cada camada da sua API deve estar em seu respectivo diretório`;
->- `Arquivo index.js`;
->- `Conexão com o Banco`.
-
-### :information_source: Para **Produtos**
-
-- O endpoint para listar produtos deve ser acessível através do caminho (`/products`) e (`/products/:id`);
-
-- Através do caminho `/products`, todos os produtos devem ser retornados;
-
-- Através do caminho `/products/:id`, apenas o produto com o `id` presente na URL deve ser retornado;
-
-- o resultado deve ser **ordernado** de forma crescente pelo campo `id`;
-
-<details close>
-  <summary>O que será validado no endpoint para listar produtos</summary>
+  <summary>O que é retornado</summary>
   <br>
 
   > :point_right: Para o endpoint `GET /products`, será validado que todos produtos estão sendo retornados.
@@ -231,13 +197,6 @@ A tabela `sales_products`, é a tabela que faz o relacionamento `N:N` entre `pro
         "name": "produto A",
         "quantity": 10
       }
-    ```
-
-  > :point_right: Para o endpoint `GET /products/:id`, será validado que não é possível listar um produto que não existe.
-
-  - sua API deve responder com status http `404` e o seguinte `body`:
-    ```json
-      { "message": "Product not found" }
     ```
 </details>
 <br>
