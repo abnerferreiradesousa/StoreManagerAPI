@@ -199,7 +199,7 @@ A tabela `sales_products`, é a tabela que faz o relacionamento `N:N` entre `pro
       }
   ```
   
-  </details
+  </details>
   
   
 ## 3 - O endpoint `/sales` para listar as vendas
@@ -247,6 +247,9 @@ A tabela `sales_products`, é a tabela que faz o relacionamento `N:N` entre `pro
         }
       ]
     ```
+    
+  </details>
+    
   
 ## 5 - O endpoint `/products` com método `POST` é usado para o cadastro de produtos
  <details close>
