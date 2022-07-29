@@ -163,17 +163,12 @@ A tabela `sales_products`, é a tabela que faz o relacionamento `N:N` entre `pro
   <br />
 </details>
 
-# Requisitos Obrigatórios
+# Rotas
 
 ## 1 - O endpoint `/products` para listar os produtos e as vendas
-## 2 - O endpoint `/products/:id` para listar um único produto e as vendas
-
-<details close>
+  <details close>
   <summary>O que é retornado</summary>
   <br>
-
-  > :point_right: Para o endpoint `GET /products`, será validado que todos produtos estão sendo retornados.
-  - sua API deve responder com status http `200` e o seguinte `body`:
   ```json
     [
       {
@@ -188,9 +183,12 @@ A tabela `sales_products`, é a tabela que faz o relacionamento `N:N` entre `pro
       }
     ]
   ```
+  </details>
+## 2 - O endpoint `/products/:id` para listar um único produto e as vendas
 
-  > :point_right: Para o endpoint `GET /products/:id`, será validado que é possível listar um determinado produto.
-  - sua API deve responder com status http `200` e o seguinte `body`:
+<details close>
+  <summary>O que é retornado</summary>
+  <br>
     ```json
       {
         "id": 1,
