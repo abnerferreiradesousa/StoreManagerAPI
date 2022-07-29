@@ -201,7 +201,7 @@ A tabela `sales_products`, é a tabela que faz o relacionamento `N:N` entre `pro
   
   </details
   
-  ## 3 - O endpoint `/sales` para listar as vendas
+## 3 - O endpoint `/sales` para listar as vendas
   <details close>
   <summary>O que é retornado</summary>
   <br>
@@ -281,18 +281,9 @@ A tabela `sales_products`, é a tabela que faz o relacionamento `N:N` entre `pro
 
 * Retorna o status 204 e nenhum body.
 
-## 7 - Crie um endpoint para cadastrar vendas
+## 8 - O endpoint `/sales` com método `POST` serve para cadastrar vendas
 
 - O endpoint deve ser acessível através do caminho (`/sales`);
-
-- As vendas enviadas devem ser salvas na tabela `sales` e `sales_products` do Banco de dados;
-
-- Deve ser possível cadastrar a venda de vários produtos através da uma mesma requisição;
-
-- *Observe as regras de negócio e coloque na camada certa;*
-
->💬 Em caso de dúvidas, lembre-se de consultar a seção `Dicas importantes`, neste README
-
 <details close>
   <summary>O que será validado</summary>
   <br>
@@ -352,22 +343,13 @@ A tabela `sales_products`, é a tabela que faz o relacionamento `N:N` entre `pro
     ```
 </details>
 
-## 8 - Crie um endpoint para atualizar uma venda
-
-- O endpoint deve ser acessível através do caminho (`/sales/:id`);
-
-- `quantity` deve ser um número inteiro maior que 0;
-
-- Apenas a venda com o `id` presente na URL deve ser atualizada;
-
-- *Observe as regras de negócio e coloque na camada certa;*
+## 9 - O endpoint `/sales/:id` com método `PUT` serve para atualizar uma venda
 
 <details close>
   <summary>O que será validado</summary>
   <br>
 
-  > :point_right: Para o endpoint `PUT /sales/:id`, quando a requisição é feita corretamente, a venda deve ser alterada.
-  - Quando a requisição é feita e contém o seguinte `body`:
+
     ```json
       [
         {
@@ -390,43 +372,7 @@ A tabela `sales_products`, é a tabela que faz o relacionamento `N:N` entre `pro
     ```
 </details>
 
-# Requisitos Bônus
+## 10 - O endpoint `/sales/:id` com método `DELETE` para deletar uma venda
 
-## 10 - Crie um endpoint para deletar uma venda
-
-- O endpoint deve ser acessível através do caminho (`/sales/:id`);
-
-- Apenas a venda com o `id` presente na URL deve ser deletado;
-
-<details close>
-  <summary>O que será validado</summary>
-  <br>
-
-  > :point_right: Para o endpoint `DELETE /sales/:id`, será validado que é possível deletar uma venda com sucesso.
-  - sua API deve responder com status http `204` e sem nenhuma resposta no `body`.
-
-  > :point_right: Para o endpoint `DELETE /sales/:id`, será validado que não é possível deletar uma venda que não existe.
-  - sua API deve responder com status http `404` e o seguinte `body`:
-  ```json
-    { "message": "Sale not found" }
-  ```
-
-</details>
-
-## 11 - Atualize a quantidade de produtos
-
-- Ao realizar uma venda, atualizá-la ou deletá-la, você deve também atualizar a quantidade do produto em questão presente na tabela responsável pelos produtos;
-
-  - **Exemplo 1**: suponha que haja um produto chamado *Bola de Futebol* e a sua propriedade `quantity` tenha o valor *10*. Caso seja feita uma venda com *8* unidades desse produto, a quantidade do produto deve ser atualizada para *2* , pois 10 - 8 = 2;
-  - **Exemplo 2**: Suponha que esta venda tenha sido deletada, logo estas *8* unidades devem voltar ao `quantity` e seu valor voltará a *10*, pois 2 + 8 = 10;
-
-<details close>
-  <summary>O que será validado</summary>
-  <br>
-
-  > :point_right: Será validado que ao **fazer uma determinada venda**, a quantidade do produto deverá ser atualizada **também** na tabela responsável pelos produtos.
-
-  > :point_right: Será validado que ao **deletar uma determinada venda**, a quantidade do produto deverá ser atualizada **também** na tabela responsável pelos produtos;.
-
-</details>
+Retorna um status 204 e nenhuma resposta no body.
 
