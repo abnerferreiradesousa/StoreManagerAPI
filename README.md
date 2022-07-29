@@ -169,6 +169,7 @@ A tabela `sales_products`, é a tabela que faz o relacionamento `N:N` entre `pro
   <details close>
   <summary>O que é retornado</summary>
   <br>
+    
   ```json
     [
       {
@@ -184,11 +185,12 @@ A tabela `sales_products`, é a tabela que faz o relacionamento `N:N` entre `pro
     ]
   ```
   </details>
+  
 ## 2 - O endpoint `/products/:id` para listar um único produto e as vendas
-
 <details close>
   <summary>O que é retornado</summary>
   <br>
+  
     ```json
       {
         "id": 1,
@@ -202,12 +204,6 @@ A tabela `sales_products`, é a tabela que faz o relacionamento `N:N` entre `pro
 ### :information_source: Para **Vendas**
 
 - O endpoint para listar vendas deve ser acessível através do caminho (`/sales`) e (`/sales/:id`);
-
-- Através do caminho `/sales`, todas as vendas devem ser retornadas;
-
-- Através do caminho `/sales/:id`, apenas a venda com o `id` presente na URL deve ser retornada;
-
-- o resultado deve ser **ordernado** de forma crescente pelo campo `saleId`, em caso de empate, **ordernar** também de forma crescente pelo campo `productId`;
 
 <details close>
   <summary>O que será validado no endpoint para listar vendas</summary>
@@ -247,12 +243,6 @@ A tabela `sales_products`, é a tabela que faz o relacionamento `N:N` entre `pro
           "quantity": 2
         }
       ]
-    ```
-
-  > :point_right: Para o endpoint `GET /sales/:id`, será validado que não é possível listar uma venda que não existe.
-  - sua API deve responder com status http `404` e o seguinte `body`:
-    ```json
-      { "message": "Sale not found" }
     ```
 </details>
 
